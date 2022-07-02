@@ -412,3 +412,8 @@ label #cancel {
 .contact:hover {
   height: 70px;
 }
+
+.arrow {
+  cursor: none;
+  pointer-events: none;
+}

@@ -4,9 +4,9 @@ var rent = '';
 var recent = '';
 amscroll = 0;
 alock = false;
+slock = false;
 var rdb = firebase.database();
 //end var set
-
 document.getElementById('body').classList.add('bg-dark')
 document.getElementById('root').style.display = 'none';
 document.getElementById('loading').style.display = 'block';
@@ -14,6 +14,10 @@ setTimeout(()=>{
   document.getElementById('body').classList.remove('bg-dark')
   document.getElementById('root').style.display = 'block';
   document.getElementById('loading').style.display = 'none';
+  document.getElementById('about').style.opacity = '0';
+  document.getElementById('skills').style.opacity = '0';
+  document.getElementById('project').style.opacity = '0';
+  document.getElementById('bg').style.opacity = '0';
 },2500)
 
 // //check update
@@ -76,19 +80,20 @@ const Home = {
       <header>Shorcut</header>
       <ul>
         <li onclick="document.getElementById('cbs').scrollTop = 0;"><a><i class="fa fa-house"></i> Home</a></li>
-        <li onclick="document.getElementById('cbs').scrollTop = 200;"><a><i class="fa fa-user"></i> About Me</a></li>
+        <li onclick="document.getElementById('cbs').scrollTop = 300;"><a><i class="fa fa-user"></i> About Me</a></li>
         <li onclick="document.getElementById('cbs').scrollTop = 600;"><a><i class="fa fa-brain"></i> Skills</a></li>
-        <li onclick="document.getElementById('cbs').scrollTop = 1100;"><a><i class="fa fa-pen-ruler"></i> Project</a></li>
-        <li><a><i class="fa fa-address-card"></i> Contact</a></li>
+        <li onclick="document.getElementById('cbs').scrollTop = 1000;"><a><i class="fa fa-pen-ruler"></i> Project</a></li>
+        <li onclick="document.getElementById('cbs').scrollTop = 1400;"><a><i class="fa fa-address-card"></i> Contact</a></li>
       </ul>
     </div>
     <div class="anim text-light" id="home" style="margin-top: 100px;">
     <center><img height="80" width="80" src="global/sources/people.png" class="profile">
     <h3 style="margin-top: 10px;">Hello <span style="color: blue;">Im</span></h3>
     <h2>Syeif Sultoni Akbar</h2>
-    <i id="arrow" style="font-size: 30px; margin-top: 35px" class="fa fa-arrow-down anim"></i>
+    <i id="arrow" style="font-size: 30px; margin-top: 35px" class="fa fa-arrow-down arrow anim"></i>
     </center>
     </div>
+    <canvas height="100"></canvas>
     <div id="bg" class="bg-dark anim">
     <div id="about" style="margin-top: -50px" class="anim bg-dark">
       <h3 class="text-light" style="text-align: center;">About Me</h3>
@@ -106,10 +111,7 @@ const Home = {
     <canvas height="100"></canvas>
     <div id="skills" class="anim">
       <h3 class="text-light" style="text-align: center;">Skills</h3>
-      <center>
-        <iframe width="500" height="500" src="https://github-readme-stats.vercel.app/api?username=Goldn7799&show_icons=true"></iframe>
-        <iframe width="250" height="250" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Goldn7799"></iframe>
-      </center>
+      <center id="skill-list"></center>
     </div>
     <div id="project" class="anim">
       <h3 class="text-light" style="text-align: center;">Project</h3>
@@ -148,6 +150,7 @@ const Home = {
     </center>
     </div>
     <canvas height="150"></canvas>
+    <center class="bg-dark"><h5 class="text-light">Made By <span class="text-primary">Syeif Sultoni Akbar</span></h5><canvas height="50"></canvas></center>
     </div>
     
     </section>`;
@@ -196,29 +199,34 @@ const update = window.setInterval(()=>{
   //scroll
 const scrl = window.setInterval(()=>{
   amscroll = document.getElementById('cbs').scrollTop;
-  if (amscroll > 199 || amscroll < 0){
+  if (amscroll > 299 || amscroll < 0){
     document.getElementById('arrow').style.display = 'none';
     document.getElementById('home').style.opacity = '0';
   }else {
     document.getElementById('arrow').style.display = 'block';
     document.getElementById('home').style.opacity = '100';
   }
-  if (amscroll < 199 || amscroll > 499){
-    document.getElementById('about').style.opacity = '0';
+  if (amscroll < 299 || amscroll > 599){
+    // document.getElementById('about').style.opacity = '0';
   }else {
     document.getElementById('about').style.opacity = '100';
   }
-  if (amscroll < 399 || amscroll > 899){
-    document.getElementById('skills').style.opacity = '0';
+  if (amscroll < 499 || amscroll > 999){
+    // document.getElementById('skills').style.opacity = '0';
   }else {
     document.getElementById('skills').style.opacity = '100';
+    if (slock == false) {
+      slock = true;
+      document.getElementById('skill-list').innerHTML = `<iframe width="400" height="400" src="https://github-readme-stats.vercel.app/api?username=Goldn7799&show_icons=true"></iframe>
+      <iframe width="250" height="250" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Goldn7799"></iframe>`;
+    };
   }
-  if (amscroll < 799 || amscroll > 1399){
-    document.getElementById('project').style.opacity = '0';
+  if (amscroll < 899 || amscroll > 1499){
+    // document.getElementById('project').style.opacity = '0';
   }else {
     document.getElementById('project').style.opacity = '100';
   }
-  if (amscroll < 199){
+  if (amscroll < 299){
     document.getElementById('bg').style.opacity = '0';
   }else {
     document.getElementById('bg').style.opacity = '100';
